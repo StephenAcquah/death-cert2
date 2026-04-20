@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Details Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .form-section {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 1.1em;
+        }
+        label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        input:focus, textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background-color: #ffffff;
+            outline: none;
+        }
+        .children-section {
+            display: flex;
+            gap: 15px;
+        }
+        .children-section input {
+            flex: 1;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .preview {
+            margin-top: 40px;
+            border-top: 3px solid #333;
+            padding-top: 30px;
+            background: linear-gradient(135deg, #eef2fb 0%, #d5dff1 100%);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .preview h2 {
+            text-align: center;
+            color: #2d2d2d;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .preview .subtitle {
+            text-align: center;
+            color: #5b5b7c;
+            font-size: 1em;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        .certificate {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+            border-radius: 10px;
+            position: relative;
+            text-align: left;
+        }
+        .certificate-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f9faff 100%);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .certificate-header h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4em;
+            color: #2c2c2c;
+        }
+        .certificate-header p {
+            margin: 10px auto 0;
+            color: #5b5b7c;
+            max-width: 650px;
+            font-size: 1em;
+            line-height: 1.7;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+        .detail-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.16);
+            box-shadow: 0 8px 18px rgba(102, 126, 234, 0.06);
+        }
+        .detail-card .label {
+            display: block;
+            color: #6e6e8a;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+        .detail-card .value {
+            color: #2a2a2a;
+            font-size: 1.1em;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        .detail-block {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 22px;
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            box-shadow: 0 8px 18px rgba(102, 126, 234, 0.05);
+            margin-bottom: 18px;
+        }
+        .detail-block strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #3b3b52;
+            font-size: 1.05em;
+            letter-spacing: 0.5px;
+        }
+        .detail-block .text-list {
+            color: #3b3b52;
+            font-size: 1em;
+            line-height: 1.7;
+        }
+        .detail-block .text-list br {
+            line-height: 1.8;
+        }
+        .action-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .action-row button {
+            width: auto;
+            min-width: 180px;
+        }
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .certificate-header {
+                padding: 24px;
+            }
+        }
+        button {
+            display: block;
+            margin: 25px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .children-section {
+                flex-direction: column;
+            }
+            .detail strong {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-scroll"></i> Death Details Form</h1>
+        <form id="detailsForm">
+            <div class="form-section">
+                <label for="name"><i class="fas fa-user"></i>Deceased Name:</label>
+                <input type="text" id="name" value="Grace Nsiah">
+            </div>
+            <div class="form-section">
+                <label for="dob">Date of Birth:</label>
+                <input type="text" id="dob" value="10th August,1955">
+            </div>
+            <div class="form-section">
+                <label for="age"><i class="fas fa-hourglass-half"></i>Age:</label>
+                <input type="text" id="age" value="71 years">
+            </div>
+            <div class="form-section">
+                <label for="dod">Date of Death:</label>
+                <input type="text" id="dod" placeholder="Enter date of death" value="17th March, 2026">
+            </div>
+            <div class="form-section">
+                <label for="dom"><i class="fas fa-ring"></i>Date of Marriage:</label>
+                <input type="text" id="dom" placeholder="Enter date of marriage" value="About 30 years">
+            </div>
+            <div class="form-section">
+                <div class="children-section">
+                    <div>
+                        <label for="totalChildren"><i class="fas fa-users"></i>Total Children:</label>
+                        <input type="text" id="totalChildren" value="6">
+                    </div>
+                    <div>
+                        <label for="boys"><i class="fas fa-male"></i>Boys:</label>
+                        <input type="text" id="boys" value="2">
+                    </div>
+                    <div>
+                        <label for="girls"><i class="fas fa-female"></i>Girls:</label>
+                        <input type="text" id="girls" value="4">
+                    </div>
+                </div>
+            </div>
+            <div class="form-section">
+                <label for="boysNames"><i class="fas fa-list"></i>Boys Names:</label>
+                <textarea id="boysNames">1.Kwaku Effah
+4.Kwame Baffoe</textarea>
+            </div>
+            <div class="form-section">
+                <label for="girlsNames"><i class="fas fa-list"></i>Girls Names:</label>
+                <textarea id="girlsNames">
+2.Ama Takyiwaa
+3.Mavis Nakor
+5.Akosua Seah
+6.Grace Nsiah</textarea>
+            </div>
+            <div class="form-section">
+                <label for="grandchildren"><i class="fas fa-baby"></i>Total Grandchildren:</label>
+                <input type="text" id="grandchildren" value="22">
+            </div>
+            <div class="form-section">
+                <label for="spouseName"><i class="fas fa-heart"></i>Spouse Name:</label>
+                <input type="text" id="spouseName" value="Kwabena Nyarkor aka F.K">
+            </div>
+            <div class="form-section">
+                <label for="spouseDeath">Spouse Death Date:</label>
+                <input type="text" id="spouseDeath" placeholder="Enter spouse death date" value="24th January,2014">
+            </div>
+            <div class="form-section">
+                <label for="fatherName"><i class="fas fa-male"></i>Father's Name:</label>
+                <input type="text" id="fatherName" value="Akwasi Nsiah">
+            </div>
+            <div class="form-section">
+                <label for="motherName"><i class="fas fa-female"></i>Mother's Name:</label>
+                <input type="text" id="motherName" value="Akua Adu Twumwaa (Akua Amoaa)">
+            </div>
+            <div class="form-section">
+                <label for="place"><i class="fas fa-map-marker-alt"></i>Place:</label>
+                <input type="text" id="place" value="Yefri">
+            </div>
+            <div class="form-section">
+                <label for="sickness"><i class="fas fa-hospital"></i>Sickness:</label>
+                <input type="text" id="sickness" value="2023">
+            </div>
+            <div class="form-section">
+                <label for="baptism"><i class="fas fa-pray"></i>Baptism Date:</label>
+                <input type="text" id="baptism" value="25th March, 2017">
+            </div>
+            <div id="customFields"></div>
+            <button type="button" onclick="addCustomField()"><i class="fas fa-plus"></i> Add Custom Field</button>
+            <button type="button" onclick="generatePreview()"><i class="fas fa-eye"></i> Generate Preview</button>
+        </form>
+        <div class="preview" id="preview" style="display: none;">
+            <h2>Death Details Certificate</h2>
+            <div class="certificate" id="detailsContent"></div>
+            <button onclick="downloadPDF()"><i class="fas fa-download"></i> Download as PDF</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        let customFieldCount = 0;
+
+        function addCustomField() {
+            customFieldCount++;
+            const customFields = document.getElementById('customFields');
+            const div = document.createElement('div');
+            div.className = 'form-section';
+            div.innerHTML = `
+                <label for="customLabel${customFieldCount}"><i class="fas fa-edit"></i>Additional Info Label:</label>
+                <input type="text" id="customLabel${customFieldCount}" placeholder="Enter additional info label">
+                <label for="customValue${customFieldCount}">Value:</label>
+                <input type="text" id="customValue${customFieldCount}" placeholder="Enter value">
+            `;
+            customFields.appendChild(div);
+        }
+
+        function generatePreview() {
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const age = document.getElementById('age').value;
+            const dod = document.getElementById('dod').value;
+            const dom = document.getElementById('dom').value;
+            const totalChildren = document.getElementById('totalChildren').value;
+            const boys = document.getElementById('boys').value;
+            const girls = document.getElementById('girls').value;
+            const boysNames = document.getElementById('boysNames').value.replace(/\n/g, '<br>');
+            const girlsNames = document.getElementById('girlsNames').value.replace(/\n/g, '<br>');
+            const grandchildren = document.getElementById('grandchildren').value;
+            const spouseName = document.getElementById('spouseName').value;
+            const spouseDeath = document.getElementById('spouseDeath').value;
+            const fatherName = document.getElementById('fatherName').value;
+            const motherName = document.getElementById('motherName').value;
+            const place = document.getElementById('place').value;
+            const sickness = document.getElementById('sickness').value;
+            const baptism = document.getElementById('baptism').value;
+
+            let customContent = '';
+            for(let i=1; i<=customFieldCount; i++){
+                const label = document.getElementById(`customLabel${i}`).value;
+                const value = document.getElementById(`customValue${i}`).value;
+                if(label && value){
+                    customContent += `<div class="detail"><strong>${label}:</strong> ${value}</div>`;
+                }
+            }
+
+            const content = `
+                <div class="certificate-header">
+                    <h3>${name || 'Deceased'}</h3>
+                    <p>Record of family details, personal history, and memorial information.</p>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <span class="label">Date of Birth</span>
+                        <span class="value">${dob}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Age</span>
+                        <span class="value">${age}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Date of Death</span>
+                        <span class="value">${dod}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Date of Marriage</span>
+                        <span class="value">${dom}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Children Left</span>
+                        <span class="value">${totalChildren} (Boys: ${boys}, Girls: ${girls})</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Total Grandchildren</span>
+                        <span class="value">${grandchildren}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Spouse Name</span>
+                        <span class="value">${spouseName}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Spouse Death Date</span>
+                        <span class="value">${spouseDeath}</span>
+                    </div>
+                </div>
+                <div class="detail-block">
+                    <strong>Boys Names</strong>
+                    <div class="text-list">${boysNames}</div>
+                </div>
+                <div class="detail-block">
+                    <strong>Girls Names</strong>
+                    <div class="text-list">${girlsNames}</div>
+                </div>
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <span class="label">Father's Name</span>
+                        <span class="value">${fatherName}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Mother's Name</span>
+                        <span class="value">${motherName}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Place</span>
+                        <span class="value">${place}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Sickness</span>
+                        <span class="value">${sickness}</span>
+                    </div>
+                    <div class="detail-card">
+                        <span class="label">Baptism Date</span>
+                        <span class="value">${baptism}</span>
+                    </div>
+                </div>
+                ${customContent ? `<div class="detail-block"><strong>Additional Details</strong>${customContent}</div>` : ''}
+            `;
+            document.getElementById('detailsContent').innerHTML = content;
+            document.getElementById('preview').style.display = 'block';
+        }
+
+       function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Set page background color (light blue)
+    doc.setFillColor(240, 248, 255); // Alice blue
+    doc.rect(0, 0, 210, 297, 'F'); // A4 size
+
+    // Add decorative border
+    doc.setDrawColor(102, 126, 234); // Purple-blue
+    doc.setLineWidth(2);
+    doc.rect(10, 10, 190, 277);
+
+    // Inner border
+    doc.setLineWidth(1);
+    doc.rect(15, 15, 180, 267);
+
+    let y = 30;
+
+    // Title with styling
+    doc.setFont("Times", "Bold");
+    doc.setFontSize(24);
+    doc.setTextColor(102, 126, 234); // Purple-blue
+    doc.text("Death Details Certificate", 105, y, { align: 'center' });
+
+    y += 15;
+
+    // Subtitle
+    doc.setFont("Times", "Italic");
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Record of family details, personal history, and memorial information", 105, y, { align: 'center' });
+
+    y += 20;
+
+    // Get values
+    const name = document.getElementById('name').value;
+    const dob = document.getElementById('dob').value;
+    const age = document.getElementById('age').value;
+    const dod = document.getElementById('dod').value;
+    const dom = document.getElementById('dom').value;
+    const totalChildren = document.getElementById('totalChildren').value;
+    const boys = document.getElementById('boys').value;
+    const girls = document.getElementById('girls').value;
+    const boysNames = document.getElementById('boysNames').value;
+    const girlsNames = document.getElementById('girlsNames').value;
+    const grandchildren = document.getElementById('grandchildren').value;
+    const spouseName = document.getElementById('spouseName').value;
+    const spouseDeath = document.getElementById('spouseDeath').value;
+    const fatherName = document.getElementById('fatherName').value;
+    const motherName = document.getElementById('motherName').value;
+    const place = document.getElementById('place').value;
+    const sickness = document.getElementById('sickness').value;
+    const baptism = document.getElementById('baptism').value;
+
+    doc.setFont("Times", "Normal");
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+
+    function addLine(label, value) {
+        doc.setFont("Times", "Bold");
+        doc.setTextColor(102, 126, 234);
+        doc.text(`${label}:`, 20, y);
+        doc.setFont("Times", "Normal");
+        doc.setTextColor(0, 0, 0);
+        doc.text(value, 80, y);
+        y += 8;
+    }
+
+    // Deceased name in larger font
+    doc.setFont("Times", "Bold");
+    doc.setFontSize(16);
+    doc.setTextColor(102, 126, 234);
+    doc.text(name || 'Deceased', 105, y, { align: 'center' });
+    y += 15;
+
+    doc.setFontSize(12);
+
+    addLine("Date of Birth", dob);
+    addLine("Age", age);
+    addLine("Date of Death", dod);
+    addLine("Date of Marriage", dom);
+    addLine("Children Left", `${totalChildren} (Boys: ${boys}, Girls: ${girls})`);
+    addLine("Total Grandchildren", grandchildren);
+    addLine("Spouse Name", spouseName);
+    addLine("Spouse Death Date", spouseDeath);
+
+    y += 5;
+
+    addLine("Father's Name", fatherName);
+    addLine("Mother's Name", motherName);
+    addLine("Place", place);
+    addLine("Sickness", sickness);
+    addLine("Baptism Date", baptism);
+
+    y += 10;
+
+    // Boys names section
+    doc.setFont("Times", "Bold");
+    doc.setTextColor(102, 126, 234);
+    doc.text("Boys Names:", 20, y);
+    y += 8;
+    doc.setFont("Times", "Normal");
+    doc.setTextColor(0, 0, 0);
+    boysNames.split("\n").forEach(name => {
+        doc.text(`• ${name.trim()}`, 25, y);
+        y += 6;
+    });
+
+    y += 5;
+
+    // Girls names section
+    doc.setFont("Times", "Bold");
+    doc.setTextColor(102, 126, 234);
+    doc.text("Girls Names:", 20, y);
+    y += 8;
+    doc.setFont("Times", "Normal");
+    doc.setTextColor(0, 0, 0);
+    girlsNames.split("\n").forEach(name => {
+        doc.text(`• ${name.trim()}`, 25, y);
+        y += 6;
+    });
+
+    // Add footer
+    doc.setFont("Times", "Italic");
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Generated on " + new Date().toLocaleDateString(), 105, 280, { align: 'center' });
+
+    doc.save("death_details.pdf");
+}
+    </script>
+</body>
+</html>
